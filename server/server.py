@@ -137,4 +137,4 @@ def update_movie_by_title(title: str, updated_movie: dict, user: dict = Depends(
 
 if __name__ == "__main__":
     import uvicorn
-    uvicorn.run("server:app", host="127.0.0.1", port=8000, reload=True)
+    uvicorn.run("server:app", host="192.168.56.1", port=8000, reload=True)

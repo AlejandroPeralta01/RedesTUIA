@@ -3,7 +3,7 @@ import flet as ft
 import json
 
 # IP ajustable
-BASE_IP = "127.0.0.1:8000"  
+BASE_IP = "192.168.56.1:8000"  
 
 def format_movies_info(movies : list) -> str:
     """
