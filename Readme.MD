@@ -79,7 +79,7 @@ Una vez que el entorno esté configurado y las dependencias instaladas, puedes e
 
 (para el servidor)
 ```bash
-python script.py
+python server.py
 ```
 
 (para el cliente)
