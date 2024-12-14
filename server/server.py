@@ -11,11 +11,9 @@ app = FastAPI()
 security = HTTPBasic()
 
 file_dir = "movies.json"
-file_path = os.path.isfile(file_dir)
-
 
 # Verificamos si el archivo ya está en nuestro path, si no, lo descargamos
-if not os.path.exists(file_path):
+if not os.path.isfile(file_dir):
     try:
         response = requests.get(url)
         response.raise_for_status()
@@ -134,7 +132,26 @@ def update_movie_by_title(title: str, updated_movie: dict, user: dict = Depends(
         return {"message": "Película actualizada correctamente"}
     except Exception as e:
         raise HTTPException(status_code=500, detail=f"Error al actualizar la película: {e}")
+    
 
+
+#ip = input("Por favor ingrese la IP: ")
+#puerto = input("Por favor ingrese el puerto: ")
+
+import socket
+
+def obtener_ip():
+    # Obtener el nombre del host
+    hostname = socket.gethostname()
+    # Obtener la dirección IP asociada al nombre del host
+    ip_local = socket.gethostbyname(hostname)
+    return ip_local
+
+# Ejemplo de uso
+ip = obtener_ip()
+print(f"La dirección IP de esta máquina es: {ip}")
+port = 8000
+ 
 if __name__ == "__main__":
     import uvicorn
-    uvicorn.run("server:app", host="192.168.56.1", port=8000, reload=True)
+    uvicorn.run("server:app", host=ip, port=port, reload=False)
