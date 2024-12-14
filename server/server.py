@@ -10,9 +10,6 @@ url = 'https://raw.githubusercontent.com/prust/wikipedia-movie-data/master/movie
 app = FastAPI()
 security = HTTPBasic()
 
-ip = "127.0.0.1"
-port = 8000
-
 file_dir = "movies.json"
 
 # Verificamos si el archivo ya está en nuestro path, si no, lo descargamos
@@ -140,4 +137,4 @@ def update_movie_by_title(title: str, updated_movie: dict, user: dict = Depends(
  
 if __name__ == "__main__":
     import uvicorn
-    uvicorn.run("server:app", host=ip, port=port, reload=False)
+    uvicorn.run("server:app", host="0.0.0.0", port=8000, reload=False)
