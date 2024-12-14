@@ -1,4 +1,4 @@
-# Proyecto: Nombre del Proyecto
+# REDES DE DATOS
 
 Este proyecto incluye un entorno virtual para la gestión de dependencias de Python y permite instalar todos los requisitos necesarios desde un archivo `requirements.txt`.
 
