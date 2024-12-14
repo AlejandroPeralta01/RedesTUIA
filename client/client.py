@@ -1,9 +1,12 @@
 import requests
 import flet as ft
-import json
+
 
 # IP ajustable
-BASE_IP = "192.168.56.1:8000"  
+ip = input("Por favor ingrese la IP: ")
+puerto = input("Por favor ingrese el puerto: ")
+
+BASE_IP = f"{ip}:{puerto}"  
 
 def format_movies_info(movies : list) -> str:
     """
@@ -38,7 +41,7 @@ def main(page: ft.Page):
     page.window_width = 600
     page.window_height = 600
 
-    def login():
+    def login(e):
         """
         Inicio de sesión de usuario. Envía una solicitud POST al servidor con las credenciales ingresadas
 
@@ -88,7 +91,7 @@ def main(page: ft.Page):
             )
         page.update()
 
-    def search_movie():
+    def search_movie(e):
         """
         Permite buscar una pelicula por título. Realiza una solicitud GET al servidor para obtener los datos de la película
         """
@@ -102,7 +105,7 @@ def main(page: ft.Page):
             result_text.value = "Película no encontrada."
         page.update()
 
-    def search_movie_by_year():
+    def search_movie_by_year(e):
         """
         Permite buscar una pelicula por año. Realiza una solicitud GET al servidor para obtener los datos de la película
         """
@@ -120,7 +123,7 @@ def main(page: ft.Page):
             result_text.value = "Películas no encontradas."
         page.update()
 
-    def search_movie_by_genre():
+    def search_movie_by_genre(e):
         """
         Permite buscar películas por género. Envía una solicitud GET al servidor para obtener las películas que coinciden
         con el género ingresado.
@@ -135,7 +138,7 @@ def main(page: ft.Page):
             result_text.value = "Películas no encontradas."
         page.update()
 
-    def add_movie():
+    def add_movie(e):
         """
         Permite agregar una nueva película al sistema.
         Toma los datos ingresados por el usuario (título, año, elenco, géneros),
@@ -154,13 +157,13 @@ def main(page: ft.Page):
         movie = {"title": title, "year": int(year), "cast": cast, "genres": genres}
         user = page.session.get("user")
         response = requests.post(f"http://{BASE_IP}/movies", json=movie, auth=(user['username'], user['password']))
-        if response.status_code == 201:
+        if response.status_code == 200:
             result_text.value = "Película agregada correctamente."
         else:
             result_text.value = "Error al agregar película."
         page.update()
 
-    def modify_movie():
+    def modify_movie(e):
         """
         Permite modificar los datos de una película existente.
         Toma los valores ingresados por el usuario y envía una solicitud PUT al servidor
@@ -180,7 +183,7 @@ def main(page: ft.Page):
             result_text.value = "Error al actualizar película."
         page.update()
 
-    def delete_movie():
+    def delete_movie(e):
         """
         Permite eliminar una película del sistema.
         Envía una solicitud DELETE al servidor con el título de la película.
