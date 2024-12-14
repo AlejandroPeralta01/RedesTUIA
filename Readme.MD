@@ -51,6 +51,11 @@ Esto creará una carpeta llamada `env` que contiene el entorno virtual.
 .\env\Scripts\activate
 ```
 
+#### En caso de no poder activar el entorno
+```bash
+Set-ExecutionPolicy Unrestricted
+```
+
 #### En macOS/Linux:
 
 ```bash
