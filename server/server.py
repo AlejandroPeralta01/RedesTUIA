@@ -10,6 +10,9 @@ url = 'https://raw.githubusercontent.com/prust/wikipedia-movie-data/master/movie
 app = FastAPI()
 security = HTTPBasic()
 
+ip = "127.0.0.1"
+port = 8000
+
 file_dir = "movies.json"
 
 # Verificamos si el archivo ya está en nuestro path, si no, lo descargamos
@@ -106,6 +109,7 @@ def delete_movie_by_title(title: str, user: dict = Depends(login)):
     try:
         movies = load_data()
         movies_total = [movie for movie in movies if movie['title'].strip().lower() != title.strip().lower()]
+        
         if len(movies_total) == len(movies):
             raise HTTPException(status_code=404, detail="Película no encontrada")
         save_data(movies_total)
@@ -133,24 +137,6 @@ def update_movie_by_title(title: str, updated_movie: dict, user: dict = Depends(
     except Exception as e:
         raise HTTPException(status_code=500, detail=f"Error al actualizar la película: {e}")
     
-
-
-#ip = input("Por favor ingrese la IP: ")
-#puerto = input("Por favor ingrese el puerto: ")
-
-import socket
-
-def obtener_ip():
-    # Obtener el nombre del host
-    hostname = socket.gethostname()
-    # Obtener la dirección IP asociada al nombre del host
-    ip_local = socket.gethostbyname(hostname)
-    return ip_local
-
-# Ejemplo de uso
-ip = obtener_ip()
-print(f"La dirección IP de esta máquina es: {ip}")
-port = 8000
  
 if __name__ == "__main__":
     import uvicorn
